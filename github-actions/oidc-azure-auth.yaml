@@ -1,0 +1,28 @@
+name: OIDC Azure Authentication
+
+on:
+  push:
+    branches: [ "main" ]
+
+permissions:
+  id-token: write # Required for requesting the JWT from GitHub's OIDC provider
+  contents: read  # Required for actions/checkout
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    # Authenticate to Azure using OIDC instead of long-lived secrets
+    - name: 'Az CLI login'
+      uses: azure/login@v1
+      with:
+        client-id: ${{ secrets.AZURE_CLIENT_ID }}
+        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        
+    - name: 'Deploy to AKS'
+      run: |
+        az aks get-credentials --resource-group my-rg --name my-aks
+        kubectl apply -f manifests/
