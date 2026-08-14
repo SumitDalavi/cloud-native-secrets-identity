@@ -2,6 +2,9 @@
 
 > A zero-trust identity architecture eliminating long-lived credentials by integrating Azure Key Vault, External Secrets Operator (ESO), and GitHub Actions OIDC.
 
+> **⚠️ PoC Note:** Full ESO setup works on a local `kind` cluster. Azure-specific features (Workload Identity, Key Vault integration) require real Azure credentials.
+
+
 ## The Problem
 
 Managing secrets in Kubernetes usually looks like this: a developer manually base64-encodes a database password, pastes it into a `Secret` YAML, and checks it into a private Git repo, or relies on brittle pipeline scripts to inject them. Worse, CI/CD pipelines use long-lived `client_secret` strings to authenticate to cloud providers, creating massive blast radiuses if a repository is compromised.
@@ -43,7 +46,7 @@ The alternative is storing secrets in a vault (like HashiCorp Vault) but injecti
 ```
 
 
-## ðŸ“‹ Prerequisites
+## 📋 Prerequisites
 
 | Tool | Version | Purpose |
 |------|---------|---------|
@@ -51,7 +54,7 @@ The alternative is storing secrets in a vault (like HashiCorp Vault) but injecti
 | [kind](https://kind.sigs.k8s.io/) or [minikube](https://minikube.sigs.k8s.io/) | Latest | Local K8s cluster |
 | [Helm](https://helm.sh/) | >= 3.x | Package manager |
 
-## ðŸš€ Step-by-Step Setup
+## 🚀 Step-by-Step Setup
 
 ### Option A: Local Cluster (kind)
 
@@ -87,7 +90,7 @@ kubectl cluster-info
 # For cloud providers, configure the SecretStore with real credentials
 ```
 
-## ðŸ§ª Usage & Demo
+## 🧪 Usage & Demo
 
 ### Step 1: Verify ESO is running
 ```bash
@@ -118,7 +121,7 @@ cat github-actions/oidc-azure-auth.yaml
 # This demonstrates passwordless auth from GitHub Actions to Azure
 ```
 
-## âœ… Verification
+## ✅ Verification
 
 | Check | Command | Expected |
 |-------|---------|----------|
@@ -134,4 +137,9 @@ kind delete cluster --name secrets-lab
 
 ## 👨‍💻 Author
 
-*Built to demonstrate zero-trust identity, credential rotation, and secure supply chains.*
+**Sumit Dalavi** — Senior DevSecOps / Platform Engineer
+[GitHub](https://github.com/SumitDalavi) | [LinkedIn](https://in.linkedin.com/in/sumit-dalavi-762838129)
+
+---
+
+*Built with a focus on production-grade patterns, not toy demos.*
