@@ -1,5 +1,17 @@
 # Architecture: Cloud-Native Secrets & Identity
 
+## System Diagram
+The following Mermaid.js sequence diagram maps the core workflow and interactions:
+
+```mermaid
+sequenceDiagram
+    Pod->>Vault: K8s ServiceAccount Token
+Vault->>Vault: Validate with K8s API
+Vault-->>Pod: Vault Token
+Pod->>Vault: Read Secret
+```
+
+
 ## The Problem with Static Credentials
 Historically, CI/CD pipelines required a `client_secret` stored in GitHub Actions to authenticate to Azure/AWS. If that secret leaked, attackers had persistent access to the cloud environment. Similarly, Kubernetes pods required `secrets` mounted into them containing database passwords. These secrets were often checked into Git repositories, leading to massive breaches.
 
