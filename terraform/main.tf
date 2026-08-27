@@ -7,7 +7,7 @@ resource "aws_secretsmanager_secret" "db_credentials" {
 }
 
 resource "aws_secretsmanager_secret_version" "db_credentials_version" {
-  secret_id     = aws_secretsmanager_secret.db_credentials.id
+  secret_id = aws_secretsmanager_secret.db_credentials.id
   secret_string = jsonencode({
     username = "admin"
     password = "supersecretpassword123!"
@@ -28,7 +28,7 @@ resource "aws_iam_role" "eso_role" {
         }
         Condition = {
           "StringEquals" = {
-            "oidc.eks.us-east-1.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:sub": "system:serviceaccount:external-secrets:eso-sa"
+            "oidc.eks.us-east-1.amazonaws.com/id/EXAMPLED539D4633E53DE1B71EXAMPLE:sub" : "system:serviceaccount:external-secrets:eso-sa"
           }
         }
       }
@@ -39,7 +39,7 @@ resource "aws_iam_role" "eso_role" {
 resource "aws_iam_policy" "eso_policy" {
   name        = "external-secrets-policy"
   description = "Policy for External Secrets Operator to read Secrets Manager"
-  policy      = jsonencode({
+  policy = jsonencode({
     Version = "2012-10-17"
     Statement = [
       {
