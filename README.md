@@ -1,3 +1,6 @@
+> **NOTE:** This repository is an archival lab or partial prototype. It is not actively maintained and should not be used as a reference for production-grade deployments or performance benchmarks.
+
+
 # Cloud-Native Secrets & Identity Platform 🔐☁️
 
 > **Maturity:** Lab / Reference Implementation
@@ -143,7 +146,7 @@ kind delete cluster --name secrets-lab
 
 ---
 
-*Built with a focus on production-grade patterns, not toy demos.*
+*Built with a focus on robust patterns, not toy demos.*
 
 ## 📚 Documentation
 
