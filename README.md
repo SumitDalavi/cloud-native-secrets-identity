@@ -1,8 +1,9 @@
 # Cloud-Native Secrets & Identity Platform 🔐☁️
 
-> A zero-trust identity architecture eliminating long-lived credentials by integrating Azure Key Vault, External Secrets Operator (ESO), and GitHub Actions OIDC.
+> **Maturity:** Lab / Reference Implementation
+> _A zero-trust identity architecture eliminating long-lived credentials by integrating Azure Key Vault, External Secrets Operator (ESO), and GitHub Actions OIDC._
 
-> **⚠️ PoC Note:** Full ESO setup works on a local `kind` cluster. Azure-specific features (Workload Identity, Key Vault integration) require real Azure credentials.
+> **⚠️ PoC Note:** Full ESO setup works on a local `kind` cluster. Azure-specific features (Workload Identity, Key Vault integration) are emulated in local testing using a Vault backend.
 
 
 ## The Problem
@@ -143,6 +144,26 @@ kind delete cluster --name secrets-lab
 ---
 
 *Built with a focus on production-grade patterns, not toy demos.*
+
+## 📚 Documentation
+
+- [Architecture](docs/ARCHITECTURE.md) — System diagram and component details
+- [Runbook](docs/runbook.md) — Setup, commands, and expected outputs
+- [Decisions](docs/decisions.md) — ADRs for secrets management
+- [Changelog](docs/changelog.md) — Change history
+
+## Mock Boundaries (Honest Scope)
+
+| What | Status | Details |
+|---|---|---|
+| Kubernetes Cluster | **Real** | Uses local `kind` cluster for the demo. |
+| External Secrets Operator | **Real** | Helm deployment of actual ESO. |
+| Cloud Vault (Azure KV) | **Mocked** | Simulated with local HashiCorp Vault in `dev` mode to avoid cloud costs. |
+| Workload Identity (Azure) | **Simulated** | Uses local SPIFFE/SPIRE deployment to emulate identity-based auth. |
+
+## 🔗 Related Projects
+
+- [`secret-sprawl-remediation-bot`](../secret-sprawl-remediation-bot/) — Remediation of exposed secrets compliments zero-trust identity.
 
 ## CI & Reliability Updates (August 2026)
 
