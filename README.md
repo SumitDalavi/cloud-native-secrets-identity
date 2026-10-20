@@ -1,17 +1,19 @@
 > **NOTE:** This repository is an archival lab or partial prototype. It is not actively maintained and should not be used as a reference for production-grade deployments or performance benchmarks.
 
-
 # Cloud-Native Secrets & Identity Platform 🔐☁️
 
-[![Release](https://img.shields.io/github/v/release/SumitDalavi/cloud-native-secrets-identity)](https://github.com/SumitDalavi/cloud-native-secrets-identity/releases)
+[![CI Pipeline](https://github.com/SumitDalavi/cloud-native-secrets-identity/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/SumitDalavi/cloud-native-secrets-identity/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/SumitDalavi/cloud-native-secrets-identity?color=0969da&label=release&logo=github)](https://github.com/SumitDalavi/cloud-native-secrets-identity/releases)
 [![Release Workflow](https://github.com/SumitDalavi/cloud-native-secrets-identity/actions/workflows/release.yml/badge.svg)](https://github.com/SumitDalavi/cloud-native-secrets-identity/actions/workflows/release.yml)
-
+[![Helm OCI](https://img.shields.io/badge/helm%20chart-0.2.0-0f1689?logo=helm&logoColor=white)](https://github.com/SumitDalavi/cloud-native-secrets-identity/pkgs/container/cloud-native-secrets-identity)
+[![Terraform](https://img.shields.io/badge/Terraform-1.6+-844FBA?logo=terraform&logoColor=white)](https://www.terraform.io)
+[![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/cloud-native-secrets-identity/releases/tag/v0.2.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
 > **Maturity:** Lab / Reference Implementation
 > _A zero-trust identity architecture eliminating long-lived credentials by integrating Azure Key Vault, External Secrets Operator (ESO), and GitHub Actions OIDC._
 
 > **⚠️ PoC Note:** Full ESO setup works on a local `kind` cluster. Azure-specific features (Workload Identity, Key Vault integration) are emulated in local testing using a Vault backend.
-
 
 ## The Problem
 
@@ -52,7 +54,6 @@ The alternative is storing secrets in a vault (like HashiCorp Vault) but injecti
 ├── docs/ARCHITECTURE.md
 └── README.md
 ```
-
 
 ## 📋 Prerequisites
 
