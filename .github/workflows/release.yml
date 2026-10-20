@@ -47,6 +47,7 @@ jobs:
 
       - name: Push Helm Chart to GHCR OCI
         run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           REPO="${{ github.event.repository.name }}"
           VER="${{ github.ref_name }}"
           SEMVER="${VER#v}"
@@ -55,8 +56,8 @@ jobs:
             --username ${{ github.actor }} --password-stdin
 
           helm package ./helm --version "${SEMVER}" --app-version "${VER}"
-          helm push "${REPO}-${SEMVER}.tgz" "oci://ghcr.io/${{ github.repository_owner }}"
-          echo "✅ Helm: oci://ghcr.io/${{ github.repository_owner }}/${REPO}:${SEMVER}"
+          helm push "${REPO}-${SEMVER}.tgz" "oci://ghcr.io/${OWNER}"
+          echo "✅ Helm: oci://ghcr.io/${OWNER}/${REPO}:${SEMVER}"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
