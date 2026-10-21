@@ -8,8 +8,7 @@
 [![SBOM](https://img.shields.io/badge/SBOM-SPDX%202.3-blueviolet?logo=spdx)](https://github.com/SumitDalavi/cloud-native-secrets-identity/releases/tag/v0.2.0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-> **Maturity:** Lab / Reference Implementation
-> _A zero-trust identity architecture eliminating long-lived credentials by integrating Azure Key Vault, External Secrets Operator (ESO), and GitHub Actions OIDC._
+> A zero-trust identity architecture eliminating long-lived credentials by integrating Azure Key Vault, External Secrets Operator (ESO), and GitHub Actions OIDC.
 
 > **⚡ Progressive Execution:** Supports zero-config local emulation with Vault backend (Tier 1) and promotes to live Azure Key Vault & Workload Identity when credentials are provided (Tier 2/3). See [Execution Tiers](#-progressive-credential-loading--execution-tiers).
 
