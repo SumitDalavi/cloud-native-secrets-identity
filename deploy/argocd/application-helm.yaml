@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloud-native-secrets-identity-helm-staging
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: security
+    environment: staging
+    packaging: helm-oci
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: oci://ghcr.io/sumitdalavi
+    chart: cloud-native-secrets-identity
+    targetRevision: "0.2.0"
+    helm:
+      releaseName: cloud-native-secrets-identity
+      values: |
+        replicaCount: 2
+        image:
+          repository: ghcr.io/sumitdalavi/cloud-native-secrets-identity
+          tag: v0.2.0
+          pullPolicy: IfNotPresent
+  destination:
+    server: https://staging-k8s.internal.net:6443
+    namespace: external-secrets
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+    retry:
+      limit: 3
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 1m

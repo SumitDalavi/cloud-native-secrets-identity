@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloud-native-secrets-identity-prod
+  namespace: argocd
+  labels:
+    app.kubernetes.io/part-of: security
+    environment: prod
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/SumitDalavi/cloud-native-secrets-identity.git
+    targetRevision: master
+    path: deploy/k8s/overlays/prod
+    kustomize:
+      images:
+        - name: ghcr.io/sumitdalavi/cloud-native-secrets-identity
+          newTag: v0.2.0
+  destination:
+    server: https://prod-k8s.internal.net:6443
+    namespace: external-secrets
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+      - RespectIgnoreDifferences=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+  ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jsonPointers:
+        - /spec/replicas
